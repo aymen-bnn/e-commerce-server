@@ -24,6 +24,6 @@ const requireAuth = (req,res,next) => {
         console.log(error)
         res.status(401).json({error : 'reqquest is not authorized '})
      }
-
-
 }
+
+module.exports = {requireAuth}

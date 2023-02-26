@@ -51,7 +51,7 @@ productSchema.statics.getProduct = async function(id){
     const product = await this.findById(id)
 
     if(!product){
-        throw Error('no such a product')
+        throw new Error('no such a product')
     }
     return product
 }
@@ -60,7 +60,7 @@ productSchema.statics.getProduct = async function(id){
 productSchema.statics.addProduct = async function(name , description , items){
 
     if(!name || !description || !items ){
-        throw Error('all fields must be filled')
+        throw new Error('all fields must be filled')
     }
 
     const product = await this.create({ name , description , items})

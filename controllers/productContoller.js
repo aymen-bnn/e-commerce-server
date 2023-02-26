@@ -11,7 +11,7 @@ const GetAllProduct = async(req , res ) => {
         console.log("getting all the products" , product)
         res.status(200).json(product)
     } catch (error) {
-        
+        res.status(400).json({error : "failed to get product"})
     }
 }
 //get a single product
@@ -23,8 +23,8 @@ const GetProduct = async (req , res) => {
     console.log(id)
 
     //check if the id is valid
-    if(!mongoose.Types.ObjectId.isValid){
-        return res.status(400).json({error : 'no suck a product'})
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(400).json({error : 'no such a product'});
     }
 
     //find the product
@@ -49,7 +49,7 @@ const AddProduct = async (req , res) => {
         res.status(200).send({name , description , items})
 
     } catch (error) {
-        console.log("failed to add product")
+        res.status(400).send({error : "failed to addnew product"})
     }
 }
 //update a product

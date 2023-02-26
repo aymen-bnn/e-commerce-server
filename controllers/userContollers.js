@@ -12,16 +12,18 @@ const loginUser = async (req , res) => {
     const {email , password} = req.body
     try {
         const user = User.login(email , password)
-
+        if(!user){
+            res.status(400).json({error : "user is not found"})
+        }
         //create atoken
-        token = createToken(user._id)
+        const token = createToken(user._id)
 
         //send the token to the brwser
         console.log({email , token})
         res.status(200).send({email , token})
 
     } catch (error) {
-        console.log(error)
+        res.status(400).json({error : error.message})
     }
 }
 
